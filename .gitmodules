@@ -1,0 +1,3 @@
+[submodule "extern/tfd"]
+	path = extern/tfd
+	url = git://git.code.sf.net/p/tinyfiledialogs/code
