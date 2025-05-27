@@ -128,6 +128,15 @@ func setup() {
 }
 
 func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[string]string) fyne.Window {
+	targets := make(map[string]string)
+	for file, path := range(conf.Targets) {
+		targets[file] = os.Expand(path, func(v string) string {
+			if x, ok := vars[v]; ok {
+				return x
+			}
+			return ""
+		})
+	}
 	window := app.NewWindow("Neyulw")
 	content := make([]*fyne.Container, 4)
 	
@@ -164,12 +173,12 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 	add_user_option_ := func(option, file, section, value string) {
 		uconf.Options[option] = Option{file, section, value}
 		le := widget.NewEntry()
-		le.Text = value
 		le.OnChanged = func(text string) {
 			v := uconf.Options[option]
 			v.Value = text
 			uconf.Options[option] = v
 		}
+		le.Text = value
 		l := widget.NewLabel(option)
 		l.Alignment = fyne.TextAlignCenter
 		l.Truncation = fyne.TextTruncateEllipsis
@@ -183,6 +192,18 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 	remove_user_option_ := func(option string) {
 		delete(uconf.Options, option)
 		delete(user_options, option)
+	}
+	for file, path := range(targets) {
+		data, err := ini.LoadSources(ini.LoadOptions{Insensitive: false, AllowShadows: false, AllowNonUniqueSections: false}, path)
+		if err == nil {
+			for _, section := range(data.Sections()) {
+				section_id := section.Name()
+				for _, key := range(section.Keys()) {
+					println(key.Name(), file, section_id, key.Value())
+					add_user_option_(key.Name(), file, section_id, key.Value())
+				}
+			}
+		}
 	}
 
 	var search *widget.Entry
@@ -362,14 +383,8 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 		})
 		save := widget.NewButton("Save", func() {
 			files := make(map[string]struct{data *ini.File; file string}, len(conf.Targets))
-			for file, path := range(conf.Targets) {
-				files[file] = struct{data *ini.File; file string}{data: ini.Empty(ini.LoadOptions{Insensitive: false, AllowShadows: false, AllowNonUniqueSections: false}),
-					file: os.Expand(path, func(v string) string {
-						if x, ok := vars[v]; ok {
-							return x
-						}
-						return ""
-					})}
+			for file, path := range(targets) {
+				files[file] = struct{data *ini.File; file string}{data: ini.Empty(ini.LoadOptions{Insensitive: false, AllowShadows: false, AllowNonUniqueSections: false}), file: path}
 				dir := filepath.Dir(files[file].file)
 				if !pathExists(dir) {
 					os.MkdirAll(dir, os.ModePerm)
@@ -444,9 +459,9 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 				bg := canvas.NewRectangle(color.Black)
 				
 				items_mutex.Lock()
-				if _, ok := uconf.Options[option]; ok {
+				if opt, ok := uconf.Options[option]; ok {
 					option_toggle.state = true
-					add_user_option_(option, info.File, info.Section, "")
+					add_user_option_(option, info.File, info.Section, opt.Value)
 				}
 				if info.Hint != "" {
 					hint := widget.NewLabel(info.Hint)
@@ -523,7 +538,6 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 			items_container.Refresh()
 		}
 		
-		// For future user conf loading
 		for _, object := range(user_options) {
 			items_container.Add(object.object)
 		}
