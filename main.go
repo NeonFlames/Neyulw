@@ -53,7 +53,6 @@ type Config struct {
 }
 
 type UserConfig struct {
-	Parent string
 	Options map[string]Option
 }
 
@@ -73,38 +72,13 @@ func ParseConfig(config_path string) interface{} {
 	return ParseConfigData(data)
 }
 
-func ParseConfigData(config []byte) Config {
+func ParseConfigData(config []byte) interface{} {
 	var conf Config
 	if err := yaml.Unmarshal(config, &conf); err != nil {
-		panic(err) // Maybe replace with nil
-	} else {
-		return conf
-	}
-}
-
-func ParseUserConfig(config_path string) interface{} {
-	data, err := os.ReadFile(config_path)
-	var config UserConfig
-	if err != nil || yaml.Unmarshal(data, &config) != nil  {
 		return nil
-	}
-	return config
+	} 
+	return conf
 }
-
-/*func RConfig(config Config, option string) *Option {
-	for file, sections := range(config.Configs) {
-		for section_id, section := range(sections) {
-			if _, ok := section.Options[option]; ok {
-				return &Option{
-					file,
-					section_id,
-					"",
-				}
-			}
-		}
-	}
-	return nil
-}*/
 
 func setup() {
 	os.Setenv("FYNE_THEME", "dark")
@@ -120,14 +94,16 @@ func setup() {
 			panic(err)
 		}
 		config_data := ParseConfigData(file_data)
-		data[config_data.Name] = config_data
+		if config_data != nil {
+			data[config_data.(Config).Name] = config_data.(Config)
+		}
 	}
 	configs = data
 	
 	// TODO: Config inheritance
 }
 
-func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[string]string) fyne.Window {
+func configureGame(app fyne.App, conf Config, vars map[string]string) fyne.Window {
 	targets := make(map[string]string)
 	for file, path := range(conf.Targets) {
 		targets[file] = os.Expand(path, func(v string) string {
@@ -139,14 +115,15 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 	}
 	window := app.NewWindow("Neyulw")
 	content := make([]*fyne.Container, 4)
+	var config_items, user_items *fyne.Container
 	
 	var option_map_mutex sync.Mutex
 	option_map := make(map[string]OptionInfo)
 	for file, sections := range(conf.Configs) {
 		var file_group sync.WaitGroup
 		for section_id, section := range(sections) {
+			file_group.Add(len(section.Options))
 			for option, info := range(section.Options) {
-				file_group.Add(1)
 				go func() {
 					option_map_mutex.Lock()
 					option_map[option] = OptionInfo{file, section_id, info.Hint}
@@ -158,15 +135,7 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 		file_group.Wait()
 	}
 
-	var uconf UserConfig
-	if user_conf != nil {
-		uconf = user_conf.(UserConfig)
-	} else {
-		uconf = UserConfig{
-			Parent: "",
-			Options: make(map[string]Option),
-		}
-	}
+	uconf := UserConfig {Options: make(map[string]Option)}
 	user_options := make(map[string]struct{object fyne.CanvasObject; le *widget.Entry})
 	var add_user_option func(option, file, section, value string)
 	var remove_user_option func(option string)
@@ -199,7 +168,6 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 			for _, section := range(data.Sections()) {
 				section_id := section.Name()
 				for _, key := range(section.Keys()) {
-					println(key.Name(), file, section_id, key.Value())
 					add_user_option_(key.Name(), file, section_id, key.Value())
 				}
 			}
@@ -376,6 +344,7 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 							}
 						}
 					}
+					user_items.Refresh()
 				}
 			}, window)
 			d.Resize(window.Canvas().Size())
@@ -435,7 +404,7 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 	{
 		var items_mutex sync.Mutex
 		items := make(map[string]struct{object fyne.CanvasObject; toggle *NeyulwToggleButton; hint *widget.Label; bg *canvas.Rectangle})
-		items_container := container.NewVBox()
+		config_items = container.NewVBox()
 
 		var items_sync sync.WaitGroup
 		items_sync.Add(len(option_map))
@@ -459,9 +428,8 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 				bg := canvas.NewRectangle(color.Black)
 				
 				items_mutex.Lock()
-				if opt, ok := uconf.Options[option]; ok {
+				if _, ok := uconf.Options[option]; ok {
 					option_toggle.state = true
-					add_user_option_(option, info.File, info.Section, opt.Value)
 				}
 				if info.Hint != "" {
 					hint := widget.NewLabel(info.Hint)
@@ -477,7 +445,7 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 		items_sync.Wait()
 
 		search1 = func(text string, enabled, hints bool) {
-			items_container.RemoveAll()
+			config_items.RemoveAll()
 			i := 0
 			value := strings.ToLower(text)
 
@@ -505,25 +473,25 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 				} else {
 					v.bg.FillColor = color.RGBA{50,50,50,255}
 				}
-				items_container.Add(v.object)
+				config_items.Add(v.object)
 				i++
 			}
 			if i >= 15 {
 				omitted := widget.NewLabel(".. Omitted ..")
 				omitted.Alignment = fyne.TextAlignCenter
-				items_container.Add(widget.NewSeparator())
-				items_container.Add(omitted)
+				config_items.Add(widget.NewSeparator())
+				config_items.Add(omitted)
 			}
-			items_container.Refresh()
+			config_items.Refresh()
 		}
 		search_only = 1
 		search.OnChanged("")
-		content[2] = container.NewBorder(nil, nil, nil, nil, items_container)
+		content[2] = config_items
 	}
 	{
-		items_container := container.NewVBox()
+		user_items = container.NewVBox()
 		search2 = func(text string, _, hints bool) {
-			items_container.RemoveAll()
+			user_items.RemoveAll()
 			t := strings.ToLower(text)
 			for option, v := range(user_options) {
 				if hints {
@@ -533,30 +501,27 @@ func configureGame(app fyne.App, conf Config, user_conf interface{}, vars map[st
 				} else if !strings.Contains(strings.ToLower(option), t) {
 					continue
 				}
-				items_container.Add(v.object)
+				user_items.Add(v.object)
 			}
-			items_container.Refresh()
+			user_items.Refresh()
 		}
 		
 		for _, object := range(user_options) {
-			items_container.Add(object.object)
+			user_items.Add(object.object)
 		}
 
 		add_user_option = func(option, file, section, value string) {
 			add_user_option_(option, file, section, value)
-			// TODO: Handle search text
-			items_container.Add(user_options[option].object)
-			items_container.Refresh()
+			user_items.Add(user_options[option].object)
 		}
 		remove_user_option = func(option string) {
 			if obj, ok := user_options[option]; ok {
-				items_container.Remove(obj.object)
-				items_container.Refresh()
+				user_items.Remove(obj.object)
 			}
 			remove_user_option_(option)
 		}
 
-		content[3] = container.NewBorder(nil, nil, nil, nil, items_container)
+		content[3] = user_items
 	}
 
 	window.SetContent(container.NewBorder(nil, nil, content[0], nil, container.NewBorder(content[1], nil, nil, nil, container.NewGridWithColumns(2, container.NewVScroll(content[2]), container.NewVScroll(content[3])))))
@@ -589,7 +554,7 @@ func main() {
 		edit := widget.NewButton("Configure", func() {
 			if check() {
 				w_init.Hide()
-				win := configureGame(ui, configs[c.Selected], nil, vars())
+				win := configureGame(ui, configs[c.Selected], vars())
 				win.Show()
 			}
 		})
