@@ -107,6 +107,7 @@ func (nm NeyulwMap[K, V]) Remove(key K) {
 		if nm._keys[index] == key {
 			break
 		}
+		index++;
 	}
 	delete(nm._keys, index)
 	delete(nm.items, key)
@@ -114,6 +115,7 @@ func (nm NeyulwMap[K, V]) Remove(key K) {
 	for index < mlen {
 		nm._keys[index-1] = nm._keys[index]
 		delete(nm._keys, index)
+		index++
 	}
 }
 
