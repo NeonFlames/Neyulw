@@ -1,3 +1,4 @@
-/bin
-/Neyulw
-/Neyulw.exe
+build*
+Neyulw
+Neyulw.exe
+/place

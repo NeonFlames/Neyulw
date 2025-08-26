@@ -1,491 +1,511 @@
-name: UE 5.X
+name: UE 5.0
 vars:
   data:
     name: Data Directory
     type: dir
     hint: Game/Game/, Yet Another Game/YAG/, UE5 Game/UG/
 targets:
-  engine: '${data}/Config/UserEngine.ini'
+  Engine: '${data}/Config/UserEngine.ini'
 presets:
   ULTRA:
     id: 1
     hint: Will probably harm your PC
-    options:
-      r.MaxQualityMode: 1
-      Niagara.GPUSorting.UseMaxPrecision: 1
-      r.AmbientOcclusion.Method: 1
-      r.AmbientOcclusionMaxQuality: -100
-      r.AOApplyToStaticIndirect: 1
-      r.AOQuality: 2
-      r.AOUseJitter: 1
-      r.BasePassOutputsVelocity: 1
-      r.BloomQuality: 5
-      r.Bloom.HalfResolutionFFT: 0
-      r.chaos.ReflectionCaptureStaticSceneOnly: 0
-      r.D3D11.Depth24Bit: 0
-      r.D3D12.Depth24Bit: 0
-      r.DefaultBackBufferPixelFormat: 4
-      r.DepthOfFieldQuality: 2
-      r.DetailMode: 2
-      r.DFFullResolution: 1
-      r.DFShadowQuality: 3
-      r.DOF.Gather.PostfilterMethod: 2
-      r.DOF.Recombine.Quality: 2
-      r.DOF.TemporalAAQuality: 1
-      r.Downsample.Quality: 1
-      r.FastBlurThreshold: 15
-      r.Filter.LoopMode: 2
-      r.Filter.SizeScale: 2
-      r.GBufferFormat: 5
-      r.GPUSkin.Support16BitBoneIndex: 1
-      r.GTAO.Downsample: 0
-      r.GTAO.FilterWidth: 8
-      r.HairStrands.DeepShadow.ShadowMaskKernelType: 4
-      r.HairStrands.DeepShadow.SuperSampling: 1
-      r.HFShadowQuality: 3
-      r.HighQualityLightMaps: 1
-      r.HZBOcclusion: 0
-      r.LensFlareQuality: 3
-      r.LightFunctionQuality: 3
-      r.LightShaftAllowTAA: 1
-      r.LightShaftQuality: 1
-      r.MaxAnisotropy: 16
-      r.MotionBlurScatter: 1
-      r.MotionBlurSeparable: 1
-      r.PostProcessAAQuality: 6
-      r.PostProcessingColorFormat: 1
-      r.RefractionQuality: 3
-      r.SceneColorFormat: 5
-      r.SceneColorFringeQuality: 1
-      r.ShadowQuality: 5
-      r.SkyAtmosphere.LUT32: 1
-      r.SkyAtmosphere.MultiScatteringLUT.HighQuality: 1
-      r.SSGI.HalfRes: 0
-      r.SSGI.LeakFreeReprojection: 1
-      r.SSR.HalfResSceneColor: 0
-      r.SSS.HalfRes: 0
-      r.Upscale.Quality: 5
+    files:
+      Engine:
+        SystemSettings:
+          Niagara.GPUSorting.UseMaxPrecision: 1
+        /Script/Engine.RendererSettings:
+          r.MaxQualityMode: 1
+          r.AmbientOcclusion.Method: 1
+          r.AmbientOcclusionMaxQuality: -100
+          r.AOApplyToStaticIndirect: 1
+          r.AOQuality: 2
+          r.AOUseJitter: 1
+          r.BasePassOutputsVelocity: 1
+          r.BloomQuality: 5
+          r.chaos.ReflectionCaptureStaticSceneOnly: 0
+          r.D3D11.Depth24Bit: 0
+          r.D3D12.Depth24Bit: 0
+          r.DefaultBackBufferPixelFormat: 4
+          r.DepthOfFieldQuality: 2
+          r.DetailMode: 2
+          r.DFFullResolution: 1
+          r.DFShadowQuality: 3
+          r.DOF.Gather.PostfilterMethod: 2
+          r.DOF.Recombine.Quality: 2
+          r.DOF.TemporalAAQuality: 1
+          r.FastBlurThreshold: 15
+          r.Filter.LoopMode: 2
+          r.Filter.SizeScale: 2
+          r.GBufferFormat: 5
+          r.GPUSkin.Support16BitBoneIndex: 1
+          r.GTAO.Downsample: 0
+          r.GTAO.FilterWidth: 8
+          r.HairStrands.DeepShadow.ShadowMaskKernelType: 4
+          r.HairStrands.DeepShadow.SuperSampling: 1
+          r.HFShadowQuality: 3
+          r.HighQualityLightMaps: 1
+          r.HZBOcclusion: 0
+          r.LensFlareQuality: 3
+          r.LightFunctionQuality: 3
+          r.LightShaftAllowTAA: 1
+          r.LightShaftQuality: 1
+          r.MaxAnisotropy: 16
+          r.MotionBlurScatter: 1
+          r.MotionBlurSeparable: 1
+          r.PostProcessingColorFormat: 1
+          r.RefractionQuality: 3
+          r.SceneColorFormat: 5
+          r.SceneColorFringeQuality: 1
+          r.ShadowQuality: 5
+          r.SkyAtmosphere.LUT32: 1
+          r.SkyAtmosphere.MultiScatteringLUT.HighQuality: 1
+          r.SSGI.LeakFreeReprojection: 1
+          r.SSR.HalfResSceneColor: 0
+          r.SSS.HalfRes: 0
+          r.Upscale.Quality: 5
   High:
     id: 2
     hint: Squeeze out extra visual quality
-    options:
-      Niagara.GPUSorting.UseMaxPrecision: 1
-      r.AmbientOcclusion.Method: 1
-      r.AOQuality: 2
-      r.BloomQuality: 4
-      r.Bloom.HalfResolutionFFT: 0
-      r.D3D11.Depth24Bit: 0
-      r.D3D12.Depth24Bit: 0
-      r.DefaultBackBufferPixelFormat: 4
-      r.DepthOfFieldQuality: 2
-      r.DetailMode: 2
-      r.DFFullResolution: 1
-      r.DFShadowQuality: 3
-      r.DOF.Gather.PostfilterMethod: 2
-      r.DOF.Recombine.Quality: 2
-      r.DOF.TemporalAAQuality: 1
-      r.Downsample.Quality: 0
-      r.FastBlurThreshold: 12
-      r.Filter.LoopMode: 1
-      r.Filter.SizeScale: 1.5
-      r.GBufferFormat: 3
-      r.GPUSkin.Support16BitBoneIndex: 1
-      r.GTAO.Downsample: 0
-      r.GTAO.FilterWidth: 6
-      r.HairStrands.DeepShadow.ShadowMaskKernelType: 3
-      r.HFShadowQuality: 3
-      r.HighQualityLightMaps: 1
-      r.HZBOcclusion: 0
-      r.LensFlareQuality: 3
-      r.LightFunctionQuality: 3
-      r.LightShaftAllowTAA: 1
-      r.LightShaftQuality: 1
-      r.MaxAnisotropy: 10
-      r.MotionBlurSeparable: 1
-      r.PostProcessAAQuality: 4
-      r.RefractionQuality: 3
-      r.SceneColorFormat: 4
-      r.SceneColorFringeQuality: 1
-      r.ShadowQuality: 5
-      r.SkyAtmosphere.LUT32: 1
-      r.SkyAtmosphere.MultiScatteringLUT.HighQuality: 1
-      r.SSGI.HalfRes: 0
-      r.SSR.HalfResSceneColor: 0
-      r.SSS.HalfRes: 0
-      r.Upscale.Quality: 4
+    files:
+      Engine:
+        SystemSettings:
+          Niagara.GPUSorting.UseMaxPrecision: 1
+        /Script/Engine.RendererSettings:
+          r.AmbientOcclusion.Method: 1
+          r.AOQuality: 2
+          r.BloomQuality: 4
+          r.D3D11.Depth24Bit: 0
+          r.D3D12.Depth24Bit: 0
+          r.DefaultBackBufferPixelFormat: 4
+          r.DepthOfFieldQuality: 2
+          r.DetailMode: 2
+          r.DFFullResolution: 1
+          r.DFShadowQuality: 3
+          r.DOF.Gather.PostfilterMethod: 2
+          r.DOF.Recombine.Quality: 2
+          r.DOF.TemporalAAQuality: 1
+          r.FastBlurThreshold: 12
+          r.Filter.LoopMode: 1
+          r.Filter.SizeScale: 1.5
+          r.GBufferFormat: 3
+          r.GPUSkin.Support16BitBoneIndex: 1
+          r.GTAO.Downsample: 0
+          r.GTAO.FilterWidth: 6
+          r.HairStrands.DeepShadow.ShadowMaskKernelType: 3
+          r.HFShadowQuality: 3
+          r.HighQualityLightMaps: 1
+          r.HZBOcclusion: 0
+          r.LensFlareQuality: 3
+          r.LightFunctionQuality: 3
+          r.LightShaftAllowTAA: 1
+          r.LightShaftQuality: 1
+          r.MaxAnisotropy: 10
+          r.MotionBlurSeparable: 1
+          r.RefractionQuality: 3
+          r.SceneColorFormat: 4
+          r.SceneColorFringeQuality: 1
+          r.ShadowQuality: 5
+          r.SkyAtmosphere.LUT32: 1
+          r.SkyAtmosphere.MultiScatteringLUT.HighQuality: 1
+          r.SSR.HalfResSceneColor: 0
+          r.SSS.HalfRes: 0
+          r.Upscale.Quality: 4
   Medium:
     id: 3
     hint: Some minor tweaks for performance
-    options:
-      a.URO.Enable: 1
-      D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
-      r.AmbientOcclusion.Method: 0
-      r.AOQuality: 1
-      r.BloomQuality: 3
-      r.Bloom.HalfResolutionFFT: 1
-      r.DefaultBackBufferPixelFormat: 3
-      r.DepthOfField.MaxSize: 80
-      r.DepthOfFieldQuality: 1
-      r.DetailMode: 2
-      r.DFFullResolution: 0
-      r.DFShadowQuality: 2
-      r.DOF.Gather.PostfilterMethod: 1
-      r.DOF.Recombine.Quality: 2
-      r.DOF.TemporalAAQuality: 1
-      r.Downsample.Quality: 0
-      r.FastBlurThreshold: 7
-      r.Filter.LoopMode: 0
-      r.Filter.SizeScale: 0.9
-      r.GBufferFormat: 1
-      r.GTAO.Downsample: 1
-      r.GTAO.FilterWidth: 5
-      r.HairStrands.DeepShadow.ShadowMaskKernelType: 2
-      r.HFShadowQuality: 2
-      r.HZBOcclusion: 1
-      r.LensFlareQuality: 2
-      r.LightFunctionQuality: 2
-      r.LightShaftAllowTAA: 1
-      r.LightShaftQuality: 1
-      r.MaxAnisotropy: 4
-      r.PostProcessAAQuality: 3
-      r.RefractionQuality: 2
-      r.SceneColorFormat: 3
-      r.SceneColorFringeQuality: 1
-      r.ShadowQuality: 3
-      r.SSGI.HalfRes: 1
-      r.SSR.HalfResSceneColor: 1
-      r.SSS.HalfRes: 1
-      r.SSS.SampleSet: 1
-      r.Upscale.Quality: 3
-      r.UseFastIntersect: 1
+    files:
+      Engine:
+        SystemSettings:
+          D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
+        /Script/Engine.AnimationSettings:
+          a.URO.Enable: 1
+        /Script/Engine.RendererSettings:
+          r.AmbientOcclusion.Method: 0
+          r.AOQuality: 1
+          r.BloomQuality: 3
+          r.DefaultBackBufferPixelFormat: 3
+          r.DepthOfField.MaxSize: 80
+          r.DepthOfFieldQuality: 1
+          r.DetailMode: 2
+          r.DFFullResolution: 0
+          r.DFShadowQuality: 2
+          r.DOF.Gather.PostfilterMethod: 1
+          r.DOF.Recombine.Quality: 2
+          r.DOF.TemporalAAQuality: 1
+          r.FastBlurThreshold: 7
+          r.Filter.LoopMode: 0
+          r.Filter.SizeScale: 0.9
+          r.GBufferFormat: 1
+          r.GTAO.Downsample: 1
+          r.GTAO.FilterWidth: 5
+          r.HairStrands.DeepShadow.ShadowMaskKernelType: 2
+          r.HFShadowQuality: 2
+          r.HZBOcclusion: 1
+          r.LensFlareQuality: 2
+          r.LightFunctionQuality: 2
+          r.LightShaftAllowTAA: 1
+          r.LightShaftQuality: 1
+          r.MaxAnisotropy: 4
+          r.RefractionQuality: 2
+          r.SceneColorFormat: 3
+          r.SceneColorFringeQuality: 1
+          r.ShadowQuality: 3
+          r.SSR.HalfResSceneColor: 1
+          r.SSS.HalfRes: 1
+          r.SSS.SampleSet: 1
+          r.Upscale.Quality: 3
+          r.UseFastIntersect: 1
   Low:
     id: 4
     hint: Lower some things without sacrificing too much
-    options:
-      a.URO.Enable: 1
-      D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
-      foliage.MinLOD: 1
-      FX.AllowCulling: 1
-      r.AmbientOcclusion.Denoiser: 0
-      r.AmbientOcclusion.Method: 0
-      r.AmbientOcclusionMaxQuality: 50
-      r.AmbientOcclusionMipLevelFactor: 0.75
-      r.AOQuality: 1
-      r.BloomQuality: 2
-      r.Bloom.HalfResolutionFFT: 1
-      r.DefaultBackBufferPixelFormat: 1
-      r.DepthOfField.MaxSize: 60
-      r.DepthOfFieldQuality: 1
-      r.DetailMode: 1
-      r.DFFullResolution: 0
-      r.DFShadowQuality: 1
-      r.DiscardUnusedQuality: 1
-      r.DOF.Gather.PostfilterMethod: 1
-      r.DOF.Gather.RingCount: 3
-      r.DOF.Recombine.Quality: 1
-      r.DOF.TemporalAAQuality: 0
-      r.Downsample.Quality: 0
-      r.FastBlurThreshold: 5
-      r.Filter.LoopMode: 0
-      r.Filter.SizeScale: 0.8
-      r.GBufferFormat: 1
-      r.GTAO.Downsample: 1
-      r.GTAO.FilterWidth: 4
-      r.GTAO.Upsample: 0
-      r.HairStrands.DeepShadow.ShadowMaskKernelType: 1
-      r.HairStrands.MaterialCompaction: 1
-      r.HFShadowQuality: 1
-      r.HZBOcclusion: 2
-      r.LensFlareQuality: 1
-      r.LightFunctionQuality: 1
-      r.LightShaftAllowTAA: 0
-      r.LightShaftQuality: 0
-      r.MaxAnisotropy: 2
-      r.PostProcessAAQuality: 2
-      r.Reflections.Denoiser: 0
-      r.RefractionQuality: 2
-      r.SceneColorFormat: 3
-      r.SceneColorFringeQuality: 1
-      r.ShadowQuality: 3
-      r.SkyAtmosphere.FastSkyLUT: 1
-      r.SSGI.HalfRes: 1
-      r.SSR.HalfResSceneColor: 1
-      r.SSS.HalfRes: 1
-      r.SSS.SampleSet: 1
-      r.Upscale.Quality: 1
-      r.UseFastIntersect: 1
-      r.Vulkan.Depth24Bit: 1
+    files:
+      Engine:
+        SystemSettings:
+          D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
+          foliage.MinLOD: 1
+          FX.AllowCulling: 1
+        /Script/Engine.AnimationSettings:
+          a.URO.Enable: 1
+        /Script/Engine.RendererSettings:
+          r.AmbientOcclusion.Denoiser: 0
+          r.AmbientOcclusion.Method: 0
+          r.AmbientOcclusionMaxQuality: 50
+          r.AmbientOcclusionMipLevelFactor: 0.75
+          r.AOQuality: 1
+          r.BloomQuality: 2
+          r.DefaultBackBufferPixelFormat: 1
+          r.DepthOfField.MaxSize: 60
+          r.DepthOfFieldQuality: 1
+          r.DetailMode: 1
+          r.DFFullResolution: 0
+          r.DFShadowQuality: 1
+          r.DiscardUnusedQuality: 1
+          r.DOF.Gather.PostfilterMethod: 1
+          r.DOF.Gather.RingCount: 3
+          r.DOF.Recombine.Quality: 1
+          r.DOF.TemporalAAQuality: 0
+          r.FastBlurThreshold: 5
+          r.Filter.LoopMode: 0
+          r.Filter.SizeScale: 0.8
+          r.GBufferFormat: 1
+          r.GTAO.Downsample: 1
+          r.GTAO.FilterWidth: 4
+          r.GTAO.Upsample: 0
+          r.HairStrands.DeepShadow.ShadowMaskKernelType: 1
+          r.HFShadowQuality: 1
+          r.HZBOcclusion: 2
+          r.LensFlareQuality: 1
+          r.LightFunctionQuality: 1
+          r.LightShaftAllowTAA: 0
+          r.LightShaftQuality: 0
+          r.MaxAnisotropy: 2
+          r.Reflections.Denoiser: 0
+          r.RefractionQuality: 2
+          r.SceneColorFormat: 3
+          r.SceneColorFringeQuality: 1
+          r.ShadowQuality: 3
+          r.SkyAtmosphere.FastSkyLUT: 1
+          r.SSR.HalfResSceneColor: 1
+          r.SSS.HalfRes: 1
+          r.SSS.SampleSet: 1
+          r.Upscale.Quality: 1
+          r.UseFastIntersect: 1
+          r.Vulkan.Depth24Bit: 1
   Very Low:
     id: 5
     hint: Sacrifice visual quality and effects
     options:
-      a.URO.Enable: 1
-      D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
-      foliage.MinLOD: 2
-      FX.AllowCulling: 1
-      grass.Enable: 0
-      r.AmbientOcclusion.Denoiser: 0
-      r.AmbientOcclusionMaxQuality: 40
-      r.AmbientOcclusionMipLevelFactor: 0.9
-      r.AOQuality: 1
-      r.BloomQuality: 1
-      r.Bloom.HalfResolutionFFT: 1
-      r.D3D11.Depth24Bit: 1
-      r.D3D12.Depth24Bit: 1
-      r.DefaultBackBufferPixelFormat: 0
-      r.DepthOfField.MaxSize: 30
-      r.DepthOfFieldQuality: 1
-      r.DetailMode: 1
-      r.DFFullResolution: 0
-      r.DFShadowQuality: 1
-      r.DiscardUnusedQuality: 1
-      r.DOF.Gather.PostfilterMethod: 0
-      r.DOF.Gather.RingCount: 3
-      r.DOF.Recombine.Quality: 1
-      r.DOF.Scatter.BackgroundCompositing: 1
-      r.DOF.TemporalAAQuality: 0
-      r.Downsample.Quality: 0
-      r.EyeAdaptationQuality: 0
-      r.FastBlurThreshold: 3
-      r.Filter.LoopMode: 0
-      r.Filter.SizeScale: 0.6
-      r.GBufferFormat: 1
-      r.GTAO.Downsample: 1
-      r.GTAO.FilterWidth: 2
-      r.GTAO.Upsample: 0
-      r.HairStrands.DeepShadow.ShadowMaskKernelType: 1
-      r.HairStrands.MaterialCompaction: 1
-      r.HairStrands.RectLightingOptim: 1
-      r.HFShadowQuality: 1
-      r.HZBOcclusion: 2
-      r.LensFlareQuality: 1
-      r.LightFunctionQuality: 1
-      r.LightShaftAllowTAA: 0
-      r.LightShaftQuality: 0
-      r.MaxAnisotropy: 2
-      r.MotionBlurQuality: 0
-      r.PostProcessAAQuality: 1
-      r.RayTracing: 0
-      r.Reflections.Denoiser: 0
-      r.RefractionQuality: 1
-      r.SceneColorFormat: 1
-      r.SceneColorFringeQuality: 0
-      r.SeparateTranslucency: 0
-      r.Shaders.FastMath: 1
-      r.ShadowQuality: 2
-      r.SkyAtmosphere.FastSkyLUT: 1
-      r.SSGI.Enable: 0
-      r.SSGI.HalfRes: 1
-      r.SSR.HalfResSceneColor: 1
-      r.SSS.HalfRes: 1
-      r.SSS.SampleSet: 0
-      r.Upscale.Quality: 1
-      r.UseFastIntersect: 1
-      r.VT.EnableLossyCompressLightmaps: 1
-      r.Vulkan.Depth24Bit: 1
+    files:
+      Engine:
+        SystemSettings:
+          D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
+          foliage.MinLOD: 2
+          FX.AllowCulling: 1
+          grass.Enable: 0
+        /Script/Engine.AnimationSettings:
+          a.URO.Enable: 1
+        /Script/Engine.RendererSettings:
+          r.AmbientOcclusion.Denoiser: 0
+          r.AmbientOcclusionMaxQuality: 40
+          r.AmbientOcclusionMipLevelFactor: 0.9
+          r.AOQuality: 1
+          r.BloomQuality: 1
+          r.D3D11.Depth24Bit: 1
+          r.D3D12.Depth24Bit: 1
+          r.DefaultBackBufferPixelFormat: 0
+          r.DepthOfField.MaxSize: 30
+          r.DepthOfFieldQuality: 1
+          r.DetailMode: 1
+          r.DFFullResolution: 0
+          r.DFShadowQuality: 1
+          r.DiscardUnusedQuality: 1
+          r.DOF.Gather.PostfilterMethod: 0
+          r.DOF.Gather.RingCount: 3
+          r.DOF.Recombine.Quality: 1
+          r.DOF.Scatter.BackgroundCompositing: 1
+          r.DOF.TemporalAAQuality: 0
+          r.EyeAdaptationQuality: 0
+          r.FastBlurThreshold: 3
+          r.Filter.LoopMode: 0
+          r.Filter.SizeScale: 0.6
+          r.GBufferFormat: 1
+          r.GTAO.Downsample: 1
+          r.GTAO.FilterWidth: 2
+          r.GTAO.Upsample: 0
+          r.HairStrands.DeepShadow.ShadowMaskKernelType: 1
+          r.HairStrands.RectLightingOptim: 1
+          r.HFShadowQuality: 1
+          r.HZBOcclusion: 2
+          r.LensFlareQuality: 1
+          r.LightFunctionQuality: 1
+          r.LightShaftAllowTAA: 0
+          r.LightShaftQuality: 0
+          r.MaxAnisotropy: 2
+          r.MotionBlurQuality: 0
+          r.RayTracing: 0
+          r.Reflections.Denoiser: 0
+          r.RefractionQuality: 1
+          r.SceneColorFormat: 1
+          r.SceneColorFringeQuality: 0
+          r.SeparateTranslucency: 0
+          r.Shaders.FastMath: 1
+          r.ShadowQuality: 2
+          r.SkyAtmosphere.FastSkyLUT: 1
+          r.SSGI.Quality: 0
+          r.SSR.HalfResSceneColor: 1
+          r.SSS.HalfRes: 1
+          r.SSS.SampleSet: 0
+          r.Upscale.Quality: 1
+          r.UseFastIntersect: 1
+          r.VT.EnableLossyCompressLightmaps: 1
+          r.Vulkan.Depth24Bit: 1
   Potato:
     id: 6
     hint: Sacrifice everything
     options:
-      sg.AntiAliasingQuality: 0
-      sg.EffectsQuality: 0
-      sg.FoliageQuality: 0
-      sg.PostProcessQuality: 0
-      sg.ShadingQuality: 0
-      sg.ShadowQuality: 0
-      sg.TextureQuality: 0
-      a.StripFramesOnCompression: 1
-      a.StripOddFramesWhenFrameStripping: 1
-      a.URO.DisableInterpolation: 1
-      a.URO.Enable: 1
-      D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
-      foliage.DensityScale: 0
-      foliage.MinLOD: 3
-      FX.AllowCulling: 1
-      fx.Niagara.QualityLevel: 0
-      grass.Enable: 0
-      landscape.Optim: 1
-      r.AllowLandscapeShadows: 0
-      r.AllowSimpleLights: 0
-      r.AmbientOcclusionLevels: 0
-      r.AOQuality: 0
-      r.Atmosphere: 0
-      r.BloomQuality: 0
-      r.Bloom.HalfResolutionFFT: 1
-      r.ContactShadows: 0
-      r.D3D.RemoveUnusedInterpolators: 1
-      r.D3D11.Depth24Bit: 1
-      r.D3D12.Depth24Bit: 1
-      r.DefaultBackBufferPixelFormat: 0
-      r.DepthOfFieldQuality: 0
-      r.DetailMode: 0
-      r.DFFullResolution: 0
-      r.DFShadowQuality: 0
-      r.DisableDistortion: 1
-      r.DiscardUnusedQuality: 1
-      r.DistanceFieldBuild.EightBit: 1
-      r.DOF.Gather.PostfilterMethod: 0
-      r.DOF.Gather.RingCount: 3
-      r.DOF.Recombine.Quality: 0
-      r.DOF.Scatter.BackgroundCompositing: 1
-      r.DOF.TemporalAAQuality: 0
-      r.Downsample.Quality: 0
-      r.EyeAdaptationQuality: 0
-      r.FastBlurThreshold: 2
-      r.Filter.LoopMode: 0
-      r.Filter.SizeScale: 0.6
-      r.Fog: 0
-      r.ForceStripAdjacencyDataDuringCooking: 1
-      r.GBufferFormat: 0
-      r.GTAO.Downsample: 1
-      r.GTAO.FilterWidth: 2
-      r.GTAO.SpatialFilter: 0
-      r.GTAO.TemporalFilter: 0
-      r.GTAO.Upsample: 0
-      r.HairStrands.DeepShadow.ShadowMaskKernelType: 0
-      r.HairStrands.MaterialCompaction: 1
-      r.HairStrands.Scatter: 0
-      r.HairStrands.RectLightingOptim: 1
-      r.HFShadowQuality: 0
-      r.HZBOcclusion: 2
-      r.LensFlareQuality: 0
-      r.LightFunctionQuality: 0
-      r.LightShaftAllowTAA: 0
-      r.LightShaftQuality: 0
-      r.MaxAnisotropy: 1
-      r.MotionBlurQuality: 0
-      r.PostProcessAAQuality: 0
-      r.RayTracing: 0
-      r.Reflections.Denoiser: 0
-      r.RefractionQuality: 0
-      r.SceneColorFormat: 0
-      r.SceneColorFringeQuality: 0
-      r.SeparateTranslucency: 0
-      r.Shaders.FastMath: 1
-      r.Shadow.Denoiser: 0
-      r.ShadowQuality: 1
-      r.SkyAtmosphere: 0
-      r.SkyAtmosphere.FastSkyLUT: 1
-      r.SSGI.Enable: 0
-      r.SSGI.HalfRes: 1
-      r.SSR.HalfResSceneColor: 1
-      r.SSS.HalfRes: 1
-      r.SSS.SampleSet: 0
-      r.Upscale.Quality: 0
-      r.UseFastIntersect: 1
-      r.VolumetricCloud: 0
-      r.VolumetricFog: 0
-      r.VT.EnableLossyCompressLightmaps: 1
-      r.Vulkan.Depth24Bit: 1
+    files:
+      Engine:
+        SystemSettings:
+          sg.AntiAliasingQuality: 0
+          sg.EffectsQuality: 0
+          sg.FoliageQuality: 0
+          sg.PostProcessQuality: 0
+          sg.ShadingQuality: 0
+          sg.ShadowQuality: 0
+          sg.TextureQuality: 0
+          D3D12.AdjustTexturePoolSizeBasedOnBudget: 1
+          foliage.DensityScale: 0
+          foliage.MinLOD: 3
+          FX.AllowCulling: 1
+          fx.Niagara.QualityLevel: 0
+          grass.Enable: 0
+          landscape.Optim: 1
+        /Script/Engine.AnimationSettings:
+          a.StripFramesOnCompression: 1
+          a.StripOddFramesWhenFrameStripping: 1
+          a.URO.DisableInterpolation: 1
+          a.URO.Enable: 1
+        /Script/Engine.RendererSettings:
+          r.AllowLandscapeShadows: 0
+          r.AllowSimpleLights: 0
+          r.AmbientOcclusionLevels: 0
+          r.AOQuality: 0
+          r.BloomQuality: 0
+          r.ContactShadows: 0
+          r.D3D.RemoveUnusedInterpolators: 1
+          r.D3D11.Depth24Bit: 1
+          r.D3D12.Depth24Bit: 1
+          r.DefaultBackBufferPixelFormat: 0
+          r.DepthOfFieldQuality: 0
+          r.DetailMode: 0
+          r.DFFullResolution: 0
+          r.DFShadowQuality: 0
+          r.DisableDistortion: 1
+          r.DiscardUnusedQuality: 1
+          r.DOF.Gather.PostfilterMethod: 0
+          r.DOF.Gather.RingCount: 3
+          r.DOF.Recombine.Quality: 0
+          r.DOF.Scatter.BackgroundCompositing: 1
+          r.DOF.TemporalAAQuality: 0
+          r.EyeAdaptationQuality: 0
+          r.FastBlurThreshold: 2
+          r.Filter.LoopMode: 0
+          r.Filter.SizeScale: 0.6
+          r.Fog: 0
+          r.GBufferFormat: 0
+          r.GTAO.Downsample: 1
+          r.GTAO.FilterWidth: 2
+          r.GTAO.SpatialFilter: 0
+          r.GTAO.TemporalFilter: 0
+          r.GTAO.Upsample: 0
+          r.HairStrands.DeepShadow.ShadowMaskKernelType: 0
+          r.HairStrands.ScatterSceneLighting: 0
+          r.HairStrands.RectLightingOptim: 1
+          r.HFShadowQuality: 0
+          r.HZBOcclusion: 2
+          r.LensFlareQuality: 0
+          r.LightFunctionQuality: 0
+          r.LightShaftAllowTAA: 0
+          r.LightShaftQuality: 0
+          r.MaxAnisotropy: 1
+          r.MotionBlurQuality: 0
+          r.RayTracing: 0
+          r.Reflections.Denoiser: 0
+          r.RefractionQuality: 0
+          r.SceneColorFormat: 0
+          r.SceneColorFringeQuality: 0
+          r.SeparateTranslucency: 0
+          r.Shaders.FastMath: 1
+          r.Shadow.Denoiser: 0
+          r.ShadowQuality: 1
+          r.SkyAtmosphere: 0
+          r.SkyAtmosphere.FastSkyLUT: 1
+          r.SSGI.Quality: 0
+          r.SSR.HalfResSceneColor: 1
+          r.SSS.HalfRes: 1
+          r.SSS.SampleSet: 0
+          r.Upscale.Quality: 0
+          r.UseFastIntersect: 1
+          r.VolumetricCloud: 0
+          r.VolumetricFog: 0
+          r.VT.EnableLossyCompressLightmaps: 1
+          r.Vulkan.Depth24Bit: 1
   Anti-Stutter:
     id: 7
     hint: |-
       Reduce stuttering at the cost of disk and memory usage
       Forward subset forces forward shading and requires Shader Model 5 hardware
       Simple Forward subset is similiar to the Forward subset but only supports basic features, may not be supported depending on the game
-    options:
-      r.CreateShadersOnLoad: 1
-      niagara.CreateShadersOnLoad: 1
-      D3D12.PSO.DiskCache: 1
-      D3D12.PSO.DriverOptimizedDiskCache: 1
-      r.ShaderPipelineCache.AlwaysGenerateOSCache: 0
-      r.ShaderPipelineCache.PreOptimizeEnabled: 1
-      r.ShaderPipelineCache.PreCompileMask: -1
-      r.ShaderPipelineCache.Enabled: 1
-      r.ShaderPipelineCache.StartupMode: 1
-      r.Vulkan.PipelineCacheLoad: 1
-      r.ForceSceneHasDecals: 1
-      r.ShaderComplexity.CacheShaders: 1
-      r.TextureStreaming: 1
+    files:
+      Engine:
+        SystemSettings:
+          niagara.CreateShadersOnLoad: 1
+          D3D12.PSO.DiskCache: 1
+          D3D12.PSO.DriverOptimizedDiskCache: 1
+        /Script/Engine.RendererSettings:
+          r.CreateShadersOnLoad: 1
+          r.ShaderPipelineCache.AlwaysGenerateOSCache: 0
+          r.ShaderPipelineCache.PreOptimizeEnabled: 1
+          r.ShaderPipelineCache.PreCompileMask: -1
+          r.ShaderPipelineCache.Enabled: 1
+          r.ShaderPipelineCache.StartupMode: 1
+          r.Vulkan.PipelineCacheLoad: 1
+          r.ForceSceneHasDecals: 1
+          r.ShaderComplexity.CacheShaders: 1
+          r.TextureStreaming: 1
 
-      r.UseShaderCaching: 1
-      r.Shaders.FastMath: 1
-      # Only needed for the odd game that doesn't do this by default
-      r.Shaders.Optimize: 1
+          r.Shaders.FastMath: 1
+          # Only needed for the odd game that doesn't do this by default
+          r.Shaders.Optimize: 1
     subsets:
       Forward:
-        options:
-          r.ForwardShading: 1
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.ForwardShading: 1
       Simple Forward:
-        options:
-          r.SimpleForwardShading: 1
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.SimpleForwardShading: 1
   VSync:
     id: 8
     hint: Force VSync on
-    options:
-      r.VSync: 1
+    files:
+      Engine:
+        /Script/Engine.RendererSettings:
+          r.VSync: 1
   Unlimit Battery:
     id: 9
     hint: Disables performance limitation on battery powered devices
-    options:
-      r.DontLimitOnBattery: 1
+    files:
+      Engine:
+        /Script/Engine.RendererSettings:
+          r.DontLimitOnBattery: 1
   DXC:
     id: 10
     hint: Forces DXC to be enabled for all backends
-    options:
-      r.D3D.ForceDXC: 1
-      r.OpenGL.ForceDXC: 1
-      r.Shaders.ForceDXC: 1
+    files:
+      Engine:
+        /Script/Engine.RendererSettings:
+          r.D3D.ForceDXC: 1
+          r.OpenGL.ForceDXC: 1
+          r.Shaders.ForceDXC: 1
     subsets:
       D3D Shader Conductor:
-        options:
-          r.D3D.ForceShaderConductorDXCRewrite: 1
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.D3D.ForceShaderConductorDXCRewrite: 1
   Upscaling:
     id: 11
     hint: |-
       Edit r.ScreenPercentage and choose a subset to match your preferences
-    options:
-      r.ScreenPercentage: 70
-      r.Tonemapper.Sharpen: 1
-      r.TemporalAA.HistoryScreenPercentage: 200
-      r.TemporalAAPauseCorrect: 1
-      r.TemporalAACatmullRom: 1
-      r.TemporalAA.Quality: 2
-      r.BasePassForceOutputsVelocity: 1
-      r.VelocityOutputPass: 1
+    files:
+      Engine:
+        /Script/Engine.RendererSettings:
+          r.ScreenPercentage: 70
+          r.Tonemapper.Sharpen: 1
+          r.TemporalAA.HistoryScreenPercentage: 200
+          r.TemporalAAPauseCorrect: 1
+          r.TemporalAACatmullRom: 1
+          r.TemporalAA.Quality: 2
+          r.BasePassForceOutputsVelocity: 1
+          r.VelocityOutputPass: 1
     subsets:
       TSR:
-        options:
-          r.AntialiasingMethod: 4
-          r.TSR.ShadingRejection.SpatialFilter: 2
-          r.TSR.RejectionAntiAliasingQuality: 2
-          r.TSR.History.ScreenPercentage: 200
-          r.TSR.History.UpdateQuality: 2
-          r.TSR.Velocity.WeightClampingSampleCount: 2
-          r.TSR.Velocity.Extrapolation: 1
-          r.TemporalAA.Upsampling: 0
-          r.TemporalAA.Quality: 2
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.AntialiasingMethod: 4
+              r.TSR.ShadingRejection.SpatialFilter: 2
+              r.TSR.RejectionAntiAliasingQuality: 2
+              r.TSR.History.ScreenPercentage: 200
+              r.TSR.History.UpdateQuality: 2
+              r.TSR.Velocity.WeightClampingSampleCount: 2
+              r.TSR.Velocity.Extrapolation: 1
+              r.TemporalAA.Upsampling: 0
+              r.TemporalAA.Quality: 2
       TAA/Jitter:
-        options:
-          r.AntiAliasingMethod: 2
-          r.DefaultFeature.AntiAliasing: 2
-          r.TemporalAA.Upsampling: 1
-          r.Upscale.Quality: 4
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.AntiAliasingMethod: 2
+              r.DefaultFeature.AntiAliasing: 2
+              r.TemporalAA.Upsampling: 1
+              r.Upscale.Quality: 4
       TAA:
-        options:
-          r.AntiAliasingMethod: 2
-          r.DefaultFeature.AntiAliasing: 2
-          r.TemporalAA.Upsampling: 0
-          r.Upscale.Quality: 4
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.AntiAliasingMethod: 2
+              r.DefaultFeature.AntiAliasing: 2
+              r.TemporalAA.Upsampling: 0
+              r.Upscale.Quality: 4
       FXAA:
-        options:
-          r.AntiAliasingMethod: 1
-          r.DefaultFeature.AntiAliasing: 1
-          r.TemporalAA.Upsampling: 0
-          r.MipMapLODBias: 1
-          r.Upscale.Quality: 4
-          r.FXAA.Quality: 4
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.AntiAliasingMethod: 1
+              r.DefaultFeature.AntiAliasing: 1
+              r.TemporalAA.Upsampling: 0
+              r.MipMapLODBias: 1
+              r.Upscale.Quality: 4
+              r.FXAA.Quality: 4
       MSAA:
-        options:
-          r.AntiAliasingMethod: 3
-          r.DefaultFeature.AntiAliasing: 3
-          r.TemporalAA.Upsampling: 0
-          r.MipMapLODBias: 1
-          r.Upscale.Quality: 4
-          r.MSAA.CompositingSampleCount: 4
-          r.MSAACount: 4
-configs:
-  engine:
+        files:
+          Engine:
+            /Script/Engine.RendererSettings:
+              r.AntiAliasingMethod: 3
+              r.DefaultFeature.AntiAliasing: 3
+              r.TemporalAA.Upsampling: 0
+              r.MipMapLODBias: 1
+              r.Upscale.Quality: 4
+              r.MSAA.CompositingSampleCount: 4
+              r.MSAACount: 4
+files:
+  Engine:
     SystemSettings:
       name: System
       options:
